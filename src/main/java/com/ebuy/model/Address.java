@@ -26,8 +26,7 @@ public class Address implements Serializable {
     public Address() {
     }
 
-    public Address(int id, String address1, String address2) {
-        this.id = id;
+    public Address( String address1, String address2) {
         this.address1 = address1;
         this.address2 = address2;
     }

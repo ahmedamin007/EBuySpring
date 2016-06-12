@@ -3,6 +3,7 @@ package com.ebuy.service;
 
 
 import com.ebuy.model.Person;
+import com.ebuy.repository.AddressRepository;
 import com.ebuy.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,10 @@ public class PersonService {
     @Autowired
     PersonRepository personRepository;
     
+    @Autowired
+    AddressRepository addressRepository;
+    
+    
 	public PersonService () {
         super();
         
@@ -27,6 +32,7 @@ public class PersonService {
     public Person save(Person person){
     	System.out.println("enter save name  " + person.getName());
     	System.out.println("enter save username " + person.getPassword());
+    	addressRepository.save(person.getAddress());
         return personRepository.save(person);
     }
     

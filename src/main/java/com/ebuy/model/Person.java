@@ -6,9 +6,12 @@
 package com.ebuy.model;
 
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -27,28 +30,37 @@ public class Person {
     private String name ;
     private String phone;
     private EGender gender;
-//    @OneToMany
-//    private Address address;
+    @OneToMany
+    private List<Address> address;
 
     
-    public Person() {
+	public Person() {
     }
 
     
-    public Person( String username, String password, String name, String phone, EGender gender) {
-
+    public Person( String username, String password, String name, String phone, EGender gender, List<Address> address) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.phone = phone;
         this.gender = gender;
-        //this.address = address;
+        this.address = address;
     }
 
     public int getId() {
         return id;
     }
 
+	public List<Address> getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(List<Address> address) {
+		this.address = address;
+	}
+
+	
     public void setId(int id) {
         this.id = id;
     }
@@ -93,13 +105,6 @@ public class Person {
         this.gender = gender;
     }
 
-//    public Address getAddress() {
-//        return address;
-//    }
-//
-//    public void setAddress(Address address) {
-//        this.address = address;
-//    }
 
     
     

@@ -30,8 +30,6 @@ public class PersonService {
     }
     
     public Person save(Person person){
-    	System.out.println("enter save name  " + person.getName());
-    	System.out.println("enter save username " + person.getPassword());
     	addressRepository.save(person.getAddress());
         return personRepository.save(person);
     }

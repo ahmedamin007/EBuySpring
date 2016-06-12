@@ -8,11 +8,16 @@ package com.ebuy.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 /**
  *
@@ -27,29 +32,113 @@ public class Person {
     private int id;
     private String username;
     private String password;
-    private String name ;
+	private String firstName;
+	private String lastName;
+	private String email;
     private String phone;
+    @Enumerated(EnumType.STRING)
     private EGender gender;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Address> address;
-
+	private boolean admin;
+	
     
 	public Person() {
     }
 
-    
-    public Person( String username, String password, String name, String phone, EGender gender, List<Address> address) {
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.phone = phone;
-        this.gender = gender;
-        this.address = address;
-    }
+	public Person(String username, String password, String firstName, String lastName, String email, String phone,
+			EGender gender, List<com.ebuy.model.Address> address, boolean admin) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phone = phone;
+		this.gender = gender;
+		this.address = address;
+		this.admin = admin;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getPhone() {
+		return phone;
+	}
+
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+
+	public EGender getGender() {
+		return gender;
+	}
+
+
+	public void setGender(EGender gender) {
+		this.gender = gender;
+	}
+
 
 	public List<Address> getAddress() {
 		return address;
@@ -60,50 +149,20 @@ public class Person {
 		this.address = address;
 	}
 
-	
-    public void setId(int id) {
-        this.id = id;
-    }
 
-    public String getUsername() {
-        return username;
-    }
+	public boolean isAdmin() {
+		return admin;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
-    public String getPassword() {
-        return password;
-    }
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public EGender getGender() {
-        return gender;
-    }
-
-    public void setGender(EGender gender) {
-        this.gender = gender;
-    }
+    
 
 
     

@@ -46,12 +46,12 @@ public class PresonBean implements Serializable  {
 	public String  addCust(){
 		System.out.println("1");
 		List<Address> address = new ArrayList<>();
-		address.add(new Address("alex home" , "iwoa" ));
-		address.add(new Address("crio home" , "tanta office" ));
-		
-		Person newPerson =new Person( "ahmed", "ahmed", "amin", "8988888", EGender.Male,address);
+//		address.add(new Address("alex home" , "iwoa" ));
+//		address.add(new Address("crio home" , "tanta office" ));
+//		
+//		Person newPerson =new Person( "ahmed", "ahmed", "amin", "8988888", EGender.Male,address);
 		System.out.println("2");
-		personService.save(newPerson);
+		//personService.save(newPerson);
 		System.out.println("3");
 		return "faces/newjsf.xhtml";
 	}

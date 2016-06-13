@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
@@ -16,6 +17,7 @@ import javax.persistence.Id;
  */
 
 @Entity
+@Table(name="Address")
 public class Address implements Serializable {
     
     @Id @GeneratedValue

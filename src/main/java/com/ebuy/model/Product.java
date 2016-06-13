@@ -1,23 +1,29 @@
 package com.ebuy.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="ProductTable")
 public class Product {
 
 	@Id @GeneratedValue
 	private int id;
+	@Column(name = "productName")
 	private String productName;
+	@Column(name = "ItemDesc")
 	private String desc;
 	private double price ;
 	@OneToOne
 	private ProductType productType;
-	// denormalized filed because  we don't implements stock control 
+	@Column(name = "ItemBal")
 	private int stock;
 	
+	// stock is denormalized filed because  we don't implements stock control
 	
 	public Product(String productName, String desc, double price, ProductType productType, int stock) {
 		super();

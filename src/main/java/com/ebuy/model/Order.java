@@ -16,7 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="Order")
+@Table(name="OrderMast")
 public class Order {
 
 	@Id @GeneratedValue

@@ -1,15 +1,19 @@
 package com.ebuy.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="ProductType")
 public class ProductType {
 
 	@Id @GeneratedValue
 	private int id;
 	private String name;
+	@Column(name = "ItemDesc")
 	private String desc;
 	
 	

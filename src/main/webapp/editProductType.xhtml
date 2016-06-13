@@ -1,0 +1,72 @@
+<ui:composition template="/adminHome.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                                                             xmlns:f="http://java.sun.com/jsf/core"> 
+    
+    <ui:define name="windowTitle">
+		Product Type
+	</ui:define>
+   
+    
+	<ui:define name="content">
+		<h3>Edit Product Type</h3> <br/>
+	    <div >
+	    
+			<h:form>
+				<p:growl id="growl" showDetail="true" sticky="true" />
+				  
+			    <p:panel id="panel" header="Edit Product Type">
+			 
+			        <p:messages id="msgs" />
+			 
+			        <h:panelGrid columns="3" cellpadding="5">
+			            <p:outputLabel for="name" value="Name" />
+			            <p:inputText id="name" value="#{productTypeBean.name}" required="true" label="Name">
+			                <f:validateLength minimum="1" />
+			            </p:inputText>
+			            <p:message for="name" display="icon" />
+			 
+			            <p:outputLabel for="desc" value="description:" />
+			            <p:inputText id="desc" value="#{productTypeBean.desc}" label="Lastname" required="true">
+			                <f:validateLength minimum="1" />
+			            </p:inputText>
+			            <p:message for="desc" id="descMessage" display="icon" />
+			 
+			        </h:panelGrid>
+			 
+			        <p:commandButton value="Save" update="panel" action="#{productTypeBean.save()}" icon="ui-icon-check"  />
+			    	<p:commandButton action="/productType.jsf" value="Return"  immediate="true" />
+			    </p:panel>
+			</h:form>
+	    
+<!-- 	          <h:form >
+
+		
+   
+                       <h:panelGrid columns="2" columnClasses="label, value">
+                       
+	                        <h:outputText value="Id: "  styleClass="outputLabel"/>
+	                        <h:outputText value="#{productTypeBean.id}" styleClass="outputLabel" />
+	 
+	                        <h:outputText value="Name: " styleClass="outputLabel"  />
+	                        <p:inputText value="#{productTypeBean.name}" required="true" label="name"/>
+	 
+	                        <h:outputText value="description: " styleClass="outputLabel"/>
+	                        <p:inputText value="#{productTypeBean.desc}" required="true" label="description:" />
+ 
+
+                       </h:panelGrid>	<br/>
+                       	
+	              <p>
+	                  
+	               <p:commandButton action="#{productTypeBean.save()}" value="Save" />
+	               <p:commandButton action="/productType.jsf" value="Cancel"  immediate="true" />
+	                  
+	              </p> 
+	          </h:form>  -->
+	      </div>
+	</ui:define> 
+
+</ui:composition>

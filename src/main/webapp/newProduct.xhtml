@@ -1,0 +1,65 @@
+<ui:composition template="/adminHome.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"> 
+    
+    <ui:define name="windowTitle">
+		Product Type
+	</ui:define>
+   
+    
+	<ui:define name="content">
+		<h3>Add Product</h3> <br/>
+	    <div >
+	      
+			<h:form>
+				<p:growl id="growl" showDetail="true" sticky="true" />
+				  
+			    <p:panel id="panel" header="New Product Type">
+			 
+			        <p:messages id="msgs" />
+			 
+			        <h:panelGrid columns="3" cellpadding="5">
+			            <p:outputLabel for="name" value="Name" />
+			            <p:inputText id="name" value="#{productBean.product.productName}" required="true" label="Name">
+			                <f:validateLength minimum="1" />
+			            </p:inputText>
+			            <p:message for="name" display="icon" />
+			 
+			            <p:outputLabel for="desc" value="description:" />
+			            <p:inputText id="desc" value="#{productBean.product.desc}" label="description" required="true">
+			                <f:validateLength minimum="1" />
+			            </p:inputText>
+			            <p:message for="desc" id="descMessage" display="icon" />
+			 
+			            <p:outputLabel for="price" value="Price:" />
+			            <p:inputText id="price" value="#{productBean.product.price}" label="price" required="true">
+			                <f:validateLength minimum="1" />
+			            </p:inputText>
+			            <p:message for="price" id="priceMessage" display="icon" />
+			            
+			            <p:outputLabel for="stock" value="Stock:" />
+			            <p:inputText id="stock" value="#{productBean.product.stock}" label="stock" required="true">
+			                <f:validateLength minimum="1" />
+			            </p:inputText>
+			            <p:message for="stock" id="stockMessage" display="icon" />
+			            
+			            
+				        <p:outputLabel for="type" value="Category:" />
+				        <p:selectOneMenu id="type" value="#{productBean.product.productType}" style="width:125px">
+				            <f:selectItems itemLabel="Select One" itemValue="" />
+				        </p:selectOneMenu>
+			            
+			        </h:panelGrid>
+			 
+			        <p:commandButton value="Save" update="panel" actionListener="#{productTypeBean.saveNew()}" icon="ui-icon-check"  />
+			    	<p:commandButton action="/productType.jsf" value="Return"  immediate="true" />
+			    </p:panel>
+			</h:form>
+	    
+	      </div>
+	</ui:define> 
+
+</ui:composition>

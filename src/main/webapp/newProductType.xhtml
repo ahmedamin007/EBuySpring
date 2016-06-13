@@ -1,0 +1,48 @@
+<ui:composition template="/adminHome.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                                                             xmlns:f="http://java.sun.com/jsf/core"> 
+    
+    <ui:define name="windowTitle">
+		Product Type
+	</ui:define>
+   
+    
+	<ui:define name="content">
+		<h3>Add Product Type</h3> <br/>
+	    <div >
+	      
+			<h:form>
+				<p:growl id="growl" showDetail="true" sticky="true" />
+				  
+			    <p:panel id="panel" header="New Product Type">
+			 
+			        <p:messages id="msgs" />
+			 
+			        <h:panelGrid columns="3" cellpadding="5">
+			            <p:outputLabel for="name" value="Name" />
+			            <p:inputText id="name" value="#{productTypeBean.name}" required="true" label="Name">
+			                <f:validateLength minimum="1" />
+			            </p:inputText>
+			            <p:message for="name" display="icon" />
+			 
+			            <p:outputLabel for="desc" value="description:" />
+			            <p:inputText id="desc" value="#{productTypeBean.desc}" label="Lastname" required="true">
+			                <f:validateLength minimum="1" />
+			                <!-- <p:ajax update="desc" event="k" /> -->
+			            </p:inputText>
+			            <p:message for="desc" id="descMessage" display="icon" />
+			 
+			        </h:panelGrid>
+			 
+			        <p:commandButton value="Save" update="panel" actionListener="#{productTypeBean.saveNew()}" icon="ui-icon-check"  />
+			    	<p:commandButton action="/productType.jsf" value="Return"  immediate="true" />
+			    </p:panel>
+			</h:form>
+	    
+	      </div>
+	</ui:define> 
+
+</ui:composition>

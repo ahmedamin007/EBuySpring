@@ -21,6 +21,14 @@ public class ProductTypeService {
 		
 	}
 	
+	public  ProductType  findById(int id){
+		return productTypeRepository.findById(id);
+		
+	}
+	public void update(String name, String desc, int id) {
+		productTypeRepository.setProductTypeById(name, desc, id); 
+	}	
+	
 	public List<ProductType> findAll(){
 		return productTypeRepository.findAll();
 		
@@ -32,7 +40,8 @@ public class ProductTypeService {
 	
 	public void delete(ProductType productType){
 		productTypeRepository.delete(productType);
-		
 	}
+	
+
 
 }

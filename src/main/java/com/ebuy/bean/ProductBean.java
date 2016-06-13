@@ -25,6 +25,16 @@ public class ProductBean {
 	@Autowired
 	ProductTypeService productTypeService;
 
+	public ProductTypeService getProductTypeService() {
+		return productTypeService;
+	}
+
+
+	public void setProductTypeService(ProductTypeService productTypeService) {
+		this.productTypeService = productTypeService;
+	}
+
+
 	Product product=new Product();
 	
 
@@ -58,6 +68,7 @@ public class ProductBean {
 			
         	return "/newProduct.jsf";
 		}
+		System.out.println("item selected .." + this.product.getProductType().getName());
 		
 		productService.update(this.product.getProductName(), this.product.getDesc(), 
 				this.product.getPrice(), this.product.getProductType(), this.product.getStock() ,this.product.getId());

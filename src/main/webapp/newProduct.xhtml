@@ -46,16 +46,25 @@
 			            </p:inputText>
 			            <p:message for="stock" id="stockMessage" display="icon" />
 			            
-			            
 				        <p:outputLabel for="type" value="Category:" />
-				        <p:selectOneMenu id="type" value="#{productBean.product.productType}" style="width:125px">
-				            <f:selectItems itemLabel="Select One" itemValue="" />
+				        <p:selectOneMenu id="type" value="#{productBean.product.productType.name}"  style="width:125px">
+				            <f:selectItems value="#{productBean.productTypeService.findAll()}" var="prod" 
+				            			   itemLabel="#{prod.name}" itemValue="#{prod.name}" />
 				        </p:selectOneMenu>
+			          
+<!-- 	            owen <h:selectOneMenu value="#{studentBean.owenPro}" >
+                <f:selectItems value="#{studentBean.owenList}" var="sut" 
+                               itemValue="#{sut.name}" 
+                               itemLabel="#{sut.name}"/>
+            </h:selectOneMenu><br/><br/> -->
+            
+			            
+
 			            
 			        </h:panelGrid>
 			 
 			        <p:commandButton value="Save" update="panel" actionListener="#{productTypeBean.saveNew()}" icon="ui-icon-check"  />
-			    	<p:commandButton action="/productType.jsf" value="Return"  immediate="true" />
+			    	<p:commandButton action="/product.jsf" value="Return"  immediate="true" />
 			    </p:panel>
 			</h:form>
 	    

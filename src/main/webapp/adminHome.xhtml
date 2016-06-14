@@ -12,7 +12,6 @@
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
                 <title><ui:insert name="windowTitle"/></title>
             </f:facet>
-
         </h:head>
 
         <h:body >
@@ -32,15 +31,13 @@
 				    <p:growl autoUpdate="true"/>
 				  <h:form>
 				    <p:menu>
-				       <p:submenu label="Resources">
-		                    <p:menuitem value="Category" url="/productType.jsf"  />
+				       <p:submenu label="Admin">
+		                    <p:menuitem value="Category" url="/productType.jsf"  icon="ui-icon-document" />
 		                    <p:menuitem value="Product" url="/product.jsf"  icon="ui-icon-document" />
 		                    
-				             <p:menuitem value="Orders" url="/orderView.jsf" icon="ui-icon-arrowthick-1-s" />
-			                 <p:menuitem value="Support" url="http://www.primefaces.org/support" icon="ui-icon-wrench" />
+				             <p:menuitem value="Orders" url="/orderView.jsf" icon="ui-icon-document"  />
 
-
-					          <p:menuitem value="Customer" url="http://www.primefaces.org/downloads" icon="ui-icon-arrowthick-1-s" />
+					          <p:menuitem value="Customer" url="/customerView.jsf" icon="ui-icon-document" />
 						</p:submenu>
 				    </p:menu>
                    </h:form>

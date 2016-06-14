@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import com.ebuy.model.Product;
 import com.ebuy.service.ProductService;
 import com.ebuy.service.ProductTypeService;
-import com.sun.faces.application.resource.Resource;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,7 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
  
-
+// ahmed amin
 
 @Component
 @ManagedBean
@@ -43,8 +42,8 @@ public class ProductBean {
 	Product product=new Product();
 	private int prodPK;
 	
-	private String destination="//Volumes//D//img//";
-     
+	private String destination="//Volumes//D//Spring//EBuySpring//src//main//webapp//resources//images//";
+	
     public String getDestination() {
 		return destination;
 	}
@@ -57,15 +56,12 @@ public class ProductBean {
 	public void copyFile(String fileName, InputStream in) {
         try {
 
-        	//String relativePath="/resources/img/";
-        	 String absolutePath= FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath();
-        	
-        	 System.out.println("enter img absolutePath= " + absolutePath);
-        	 //File file = new File("/var/webapp/images/"+filename);
-        	
+        	 //String absolutePath= FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath();
+        	 //System.out.println("enter img absolutePath= " + absolutePath);
 
-        	
-             OutputStream out = new FileOutputStream(new File(absolutePath + fileName));
+        	 //System.out.println("enter img absolutePath= " + destination + prodPK + ".jpg" ) ;
+        	 
+             OutputStream out = new FileOutputStream(new File(destination + prodPK + ".jpg" ));
            
              int read = 0;
              byte[] bytes = new byte[1024];
@@ -82,7 +78,20 @@ public class ProductBean {
              }
     }
     
+	public boolean checkdata(){
+		if (this.product.getProductName().equals("") || this.product.getProductName()==null || 
+				this.product.getDesc().equals("") || this.product.getDesc()==null ){
+			
+			FacesContext.getCurrentInstance().addMessage("error", 
+					new FacesMessage("Error: fill the required filed first."));
+			
+			System.out.println("error in save ");
+			return false;
+		}
+		return  true;
+	}
     public void upload(FileUploadEvent event) {  
+
         FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");  
         FacesContext.getCurrentInstance().addMessage(null, msg);
              
@@ -91,7 +100,6 @@ public class ProductBean {
         } catch (IOException e) {
             e.printStackTrace();
         }
- 
     }
 
 
@@ -123,7 +131,7 @@ public class ProductBean {
 	}
 	
 	public String saveUpdate(){
-		System.out.println("...............enter save item selected .." + prodPK);
+
 		if (this.product.getProductName().equals("") || this.product.getProductName()==null || 
 				this.product.getDesc().equals("") || this.product.getDesc()==null ){
 			

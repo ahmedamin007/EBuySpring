@@ -10,7 +10,8 @@
    
     
 	<ui:define name="content">
-		<h3>Product </h3> <br/>
+		<p:panel id="panel" header="Product">
+		
              <p>
                  
               <p:commandButton   value="Add Product" action="#{productBean.add()}"/>
@@ -43,6 +44,10 @@
 					        <h:outputText value="#{prod.stock}" />
 					    </p:column>
 					    
+						<p:column headerText="Image">
+							<h:graphicImage value="resources/images/#{prod.id}.jpg" alt="image not available" style="" width="50px" height="50px" />
+						</p:column>
+						
 					    <p:column headerText="Edit">
 					        <h:commandLink action="#{productBean.edit(prod.id)}" value="Edit"     />
 					    </p:column>
@@ -52,10 +57,13 @@
 					        actionListener="#{productBean.delete(prod.id)}" value="Delete"     />
 					    </p:column>
 
+
+						 
 					</p:dataTable>
 
 	          </h:form> 
 	      </div>
+	     </p:panel>
 	</ui:define> 
 
 </ui:composition>

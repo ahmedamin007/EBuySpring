@@ -14,7 +14,7 @@
 		<h3>Add Product</h3> <br/>
 	    <div >
 	      
-			<h:form>
+			<h:form >
 				<p:growl id="growl" showDetail="true" sticky="true" />
 				  
 			    <p:panel id="panel" header="New Product Type">
@@ -54,17 +54,17 @@
 				            			   itemValue="#{prod.id}"  itemLabel="#{prod.name}" />
 				        </p:selectOneMenu>
 			          
+			          		 
+
+									
 			        </h:panelGrid>
 			 
 			        <p:commandButton value="Save" update="panel" actionListener="#{productBean.saveNew()}" icon="ui-icon-check"  />
 			    	<p:commandButton action="/product.jsf" value="Return"  immediate="true" />
 			    </p:panel>
-			</h:form>
-	    
-			<h:form id="form" >
-			        <p:fileUpload  fileUploadListener="#{productBean.upload}"   
-									sizeLimit="200000" description="Select Images"/>
-			</h:form>
+			</h:form> 
+			
+
 	      </div>
 	</ui:define> 
 

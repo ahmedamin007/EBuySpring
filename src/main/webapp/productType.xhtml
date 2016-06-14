@@ -10,7 +10,8 @@
    
     
 	<ui:define name="content">
-		<h3>Product Type</h3> <br/>
+		<p:panel id="panel" header="Order Type">
+		
              <p>
                  
               <p:commandButton   value="Add Category" action="#{productTypeBean.add()}"/>
@@ -43,7 +44,9 @@
 					</p:dataTable>
 
 	          </h:form> 
+	         
 	      </div>
+	      </p:panel>
 	</ui:define> 
 
 </ui:composition>

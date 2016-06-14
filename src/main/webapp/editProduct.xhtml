@@ -54,7 +54,10 @@
 				            			   itemValue="#{prod.id}"  itemLabel="#{prod.name}" />
 				        </p:selectOneMenu>
 			          
-			           <img src="http:\\localhost\D\img\1.jpg" alt="" />
+			          <!--  <img src="/img/ssn.jpg" alt="" /> -->
+			          
+			           <p:outputLabel for="image" value="Image:" />
+			           <h:graphicImage id="image" value="resources/images/#{productBean.prodPK}.jpg" alt="image not available"  width="200px" height="130px" /> 
 			           
 			        </h:panelGrid>
 			 
@@ -62,7 +65,12 @@
 			    	<p:commandButton action="/product.jsf" value="Return"  immediate="true" />
 			    </p:panel>
 			</h:form>
-	    
+			
+			<h:form id="form">
+		        <p:fileUpload  fileUploadListener="#{productBean.upload}" onstart="#{productBean.checkdata()}"  
+								sizeLimit="200000" description="Select Images"/>
+			</h:form>
+			
 	      </div>
 	</ui:define> 
 

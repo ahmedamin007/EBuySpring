@@ -30,8 +30,17 @@ public class Order {
 	private List<Orderline> orderLines;
 	@OneToOne
 	private Person person;
+	private boolean checkOutFlag;
 	
-	
+	public boolean isCheckOutFlag() {
+		return checkOutFlag;
+	}
+	public void setCheckOutFlag(boolean checkOutFlag) {
+		this.checkOutFlag = checkOutFlag;
+	}
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = totalAmount;
+	}
 	public int getId() {
 		return id;
 	}

@@ -1,65 +1,110 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
-      
-   		<f:loadBundle basename="resources" var="msg" />
-		<head>
-		<title><ui:insert name="pageTitle">Page Title</ui:insert></title>
-		<style type="text/css">
-			body {
-				  font-family: Verdana, Arial, Helvetica, sans-serif;
-				  font-size: 14px;
-			}
-			.header {
-				  font-family: Verdana, Arial, Helvetica, sans-serif;
-				  font-size: 18px;
-			}
-			.bottom {
-				  font-family: Verdana, Arial, Helvetica, sans-serif;
-				  font-size: 9px;
-				  text-align: center;
-				  vertical-align: middle;
-				  color: #8E969D;
-			}
-		</style>
-		</head>
-
-<body bgcolor="#ffffff">
-<table style="border:1px solid #CAD6E0"  align="center" cellpadding="0" cellspacing="0" border="0" width="400">
-<tbody>
-
-	<tr>
-		<td class="header" height="42" align="center" valign="middle" width="100%" bgcolor="#E4EBEB">
-			<ui:insert name="pageHeader">Page Header</ui:insert>
-		</td>
-	</tr>
-	<tr>
-		<td height="1" width="100%" bgcolor="#CAD6E0"></td>
-	</tr>	
-
-	<tr>
-		<td width="100%"  colspan="2">
-			<table width="100%" style="height:150px" align="left" cellpadding="0" cellspacing="0" border="0">
-			<tbody>
-				<tr>
-					<td align="center" width="100%" valign="middle">
+<ui:composition template="/adminHome.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                                                             xmlns:f="http://java.sun.com/jsf/core"> 
+    
+    <ui:define name="windowTitle">
+		Order 
+	</ui:define>
+   
+    
+	<ui:define name="content">
+		  
+		   <h:form>
+		   <p:growl id="msg" />
+		   <p:panel id="panel" header="Search Order">
+		   
+				<h:panelGrid columns="2" cellpadding="5">
+			        <p:outputLabel for="searchDate" value="Search date:" />
+			        <p:calendar id="searchDate" value="#{orderBean.date}" showOn="button" />
+			        
+			        <p:outputLabel for="checkout" value="Checkout:" />
+			        <p:selectBooleanCheckbox id="checkout" value="#{orderBean.checkOut}">
+			             <p:ajax update="msg" listener="#{orderBean.addMessage()}" /> 
+			        </p:selectBooleanCheckbox>
+			        
+			        
+			        <p:commandButton value="Search" id="Search" actionListener="#{orderBean.findOrderByDate()}" ajax="false" />
+			        <p:commandButton value="Perform Checkout" id="update" actionListener="#{orderBean.updateCheckOut()}" ajax="false" />
+		  		</h:panelGrid>
+		  		
+		  	 </p:panel>
+		   </h:form>
+	    <div >
+	          <h:form >
+	                <p:growl id="sct" />
+	                <h:panelGrid columns="2" cellpadding="5">
+	                    <p:outputLabel for="selectAll" value="Select All:" />
+				        <p:selectBooleanCheckbox id="selectAll" value="#{orderBean.selectAll}">
+				             <p:ajax update="sct,tbl" listener="#{orderBean.selectMessage()}"   /> 
+				        </p:selectBooleanCheckbox>
+	                </h:panelGrid>
+					<p:dataTable id= "tbl" var="ord" value="#{orderBean.orderList}" paginatorTemplate=" {FirstPageLink} 
+					{PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                 		paginator="true" rows="10" style="margin-bottom:20px"> >
 					
-					<ui:insert name="body">Page Body</ui:insert>
-					
-					</td>
-				</tr>
-			</tbody>
-			</table>
-		</td>
-	</tr>	
-	
-	<tr>
-		<td colspan="2"  valign="bottom" height="1" width="100%" bgcolor="#CAD6E0"></td>
-	</tr>
-</tbody>
-</table>
-</body>
-		
-</html>
+				        <f:facet name="{Exporters}">
+			            <h:commandLink>
+			                <p:graphicImage name="/demo/images/excel.png" width="24"/>
+			                <p:dataExporter type="xls" target="tbl" fileName="cars" />
+			            </h:commandLink>
+			 
+			            <h:commandLink>
+			                <p:graphicImage name="/demo/images/pdf.png" width="24"/>
+			                <p:dataExporter type="pdf" target="tbl" fileName="cars"/>
+			            </h:commandLink>
+			 
+			            <h:commandLink>
+			                <p:graphicImage name="/demo/images/csv.png" width="24"/>
+			                <p:dataExporter type="csv" target="tbl" fileName="cars" />
+			            </h:commandLink>
+			 
+			            <h:commandLink>
+			                <p:graphicImage name="/demo/images/xml.png" width="24"/>
+			                <p:dataExporter type="xml" target="tbl" fileName="cars" />
+			            </h:commandLink>
+			        </f:facet>
+
+					    <p:column headerText="Id">
+					        <h:outputText value="#{ord.id}" />
+					    </p:column>
+					 
+				    	<p:column headerText="Customer">
+					        <h:outputText value="#{ord.person.firstName}" />
+					    </p:column>
+					    
+					    <p:column headerText="Date" >
+					        <h:outputText value="#{ord.orderDate}" />
+					    </p:column>
+					 
+					    <p:column headerText="Number of Items">
+					        <h:outputText value="#{ord.quantity}" />
+					    </p:column>
+					    
+				    	<p:column headerText="Total Price">
+					        <h:outputText value="#{ord.totalAmount}" />
+					    </p:column>
+					    
+				        <p:column headerText="Checkout">
+					        <p:selectBooleanCheckbox id="ordCheck" value="#{ord.checkOutFlag}">
+					        </p:selectBooleanCheckbox>
+				        </p:column>
+					    
+					    <p:column headerText="Order Details">
+ 							<h:commandLink action="#{orderBean.openOrderLine(ord.id)}" value="Show Details"     />
+					    </p:column>
+						 
+					    <p:column headerText="Delete">
+					        <h:commandLink onclick="if (! confirm('Do you want to delete Order ?')) return false"
+					        actionListener="#{orderBean.deleteOrder(prod.id)}" value="Delete"     />
+					    </p:column>
+					    
+					</p:dataTable>
+
+	          </h:form> 
+	      </div>
+	</ui:define> 
+
+</ui:composition>

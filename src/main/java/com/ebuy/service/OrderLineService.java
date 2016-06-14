@@ -1,9 +1,12 @@
 package com.ebuy.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ebuy.model.Order;
 import com.ebuy.model.Orderline;
 import com.ebuy.repository.OrderLineRepository;
 
@@ -26,7 +29,14 @@ public class OrderLineService {
 	
 	public void delete(Orderline orderline){
 		orderLineRepository.delete(orderline);
-		
+	}
+	
+	public List<Orderline> findByOrder(Order order){
+		return orderLineRepository.findByOrder(order);
+	}
+	
+	public Orderline findById(int id){
+		return orderLineRepository.findById(id);
 	}
 
 }

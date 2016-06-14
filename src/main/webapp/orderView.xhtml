@@ -41,6 +41,7 @@
 				             <p:ajax update="sct,tbl" listener="#{orderBean.selectMessage()}"   /> 
 				        </p:selectBooleanCheckbox>
 	                </h:panelGrid>
+	                
 					<p:dataTable id= "tbl" var="ord" value="#{orderBean.orderList}" paginatorTemplate=" {FirstPageLink} 
 					{PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                  		paginator="true" rows="10" style="margin-bottom:20px"> >

@@ -6,21 +6,15 @@
                                                              xmlns:f="http://java.sun.com/jsf/core"> 
     
     <ui:define name="windowTitle">
-		Product Type
+		Order Details
 	</ui:define>
    
     
 	<ui:define name="content">
-		<p:panel id="panel" header="Order Type">
-		
-             <p>
-                 
-              <p:commandButton   value="Add Category" action="#{productTypeBean.add()}"/>
-                 
-             </p> 
+	  <p:panel id="panel" header="Users">
 	    <div >
 	          <h:form >
-					<p:dataTable var="prod" value="#{productTypeBean.allProductType}" paginatorTemplate=" {FirstPageLink} 
+					<p:dataTable var="cust" value="#{customerBean.findAll()}" paginatorTemplate=" {FirstPageLink} 
 					{PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                  		paginator="true" rows="10" style="margin-bottom:20px"> >
 					
@@ -45,35 +39,36 @@
 			                <p:dataExporter type="xml" target="tbl" fileName="cars" />
 			            </h:commandLink>
 			        </f:facet>
-			        
-					    <p:column headerText="Id">
-					        <h:outputText value="#{prod.id}" />
-					    </p:column>
-					 
-					    <p:column headerText="Name" >
-					        <h:outputText value="#{prod.name}" />
-					    </p:column>
-					 
-					    <p:column headerText="Description">
-					        <h:outputText value="#{prod.desc}" />
+
+				    	<p:column headerText="First Name">
+					        <h:outputText value="#{cust.firstName}" />
 					    </p:column>
 					    
-					    <p:column headerText="Edit">
-					        <h:commandLink action="#{productTypeBean.edit(prod.id)}" value="Edit"     />
+				    	<p:column headerText="Last Name">
+					        <h:outputText value="#{cust.lastName}" />
 					    </p:column>
-
-					    <p:column headerText="Delete">
-					        <h:commandLink onclick="if (! confirm('Do you want to delete category?')) return false"
-					        actionListener="#{productTypeBean.delete(prod.id)}" value="Delete"     />
+					    
+				    	<p:column headerText="Gender">
+					        <h:outputText value="#{cust.gender}" />
 					    </p:column>
-
+					    
+				    	<p:column headerText="Phone">
+					        <h:outputText value="#{cust.phone}" />
+					    </p:column>
+					    
+				    	<p:column headerText="Username">
+					        <h:outputText value="#{cust.username}" />
+					    </p:column>
+					    
+				    	<p:column headerText="Email">
+					        <h:outputText value="#{cust.email}" />
+					    </p:column>
+					    
 					</p:dataTable>
 
 	          </h:form> 
-	         
 	      </div>
-	      </p:panel>
+	   </p:panel>
 	</ui:define> 
 
 </ui:composition>
-

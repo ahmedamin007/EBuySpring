@@ -1,0 +1,53 @@
+<ui:composition template="/adminHome.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"> 
+    
+    <ui:define name="windowTitle">
+		Order Details
+	</ui:define>
+   
+    
+	<ui:define name="content">
+	  <p:panel id="panel" header="Order Details ">
+		<h:panelGrid columns="2" cellpadding="5">
+            <p:commandButton   value="back" action="/orderView.jsf"/>
+  		</h:panelGrid>
+	    <div >
+	          <h:form >
+					<p:dataTable var="ord" value="#{orderBean.orderLineList}">
+
+				    	<p:column headerText="Product category">
+					        <h:outputText value="#{ord.product.productType.name}" />
+					    </p:column>
+					    
+				    	<p:column headerText="Product Name">
+					        <h:outputText value="#{ord.product.productName}" />
+					    </p:column>
+					 
+					    <p:column headerText="Quantity">
+					        <h:outputText value="#{ord.quantity}" />
+					    </p:column>
+					    
+				    	<p:column headerText="Price">
+					        <h:outputText value="#{ord.price}" />
+					    </p:column>
+					    
+				    	<p:column headerText="Total Price">
+					        <h:outputText value="#{ord.subtotal}" />
+					    </p:column>
+					    
+					    <p:column headerText="Delete">
+					        <h:commandLink onclick="if (! confirm('Do you want to delete this Order ?')) return false"
+					        actionListener="#{orderBean.deleteOrderDetail(prod.id)}" value="Delete"     />
+					    </p:column>
+					    
+					</p:dataTable>
+
+	          </h:form> 
+	      </div>
+	   </p:panel>
+	</ui:define> 
+
+</ui:composition>

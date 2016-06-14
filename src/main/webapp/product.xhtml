@@ -2,7 +2,8 @@
                 xmlns="http://www.w3.org/1999/xhtml" 
                 xmlns:ui="http://java.sun.com/jsf/facelets" 
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.org/ui"> 
+                xmlns:p="http://primefaces.org/ui"
+                                                             xmlns:f="http://java.sun.com/jsf/core"> 
     
     <ui:define name="windowTitle">
 		Product
@@ -19,7 +20,32 @@
              </p> 
 	    <div >
 	          <h:form >
-					<p:dataTable var="prod" value="#{productBean.allProduct}">
+					<p:dataTable var="prod" value="#{productBean.allProduct}" paginatorTemplate=" {FirstPageLink} 
+					{PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                 		paginator="true" rows="10" style="margin-bottom:20px"> >
+					
+				        <f:facet name="{Exporters}">
+			            <h:commandLink>
+			                <p:graphicImage name="/demo/images/excel.png" width="24"/>
+			                <p:dataExporter type="xls" target="tbl" fileName="cars" />
+			            </h:commandLink>
+			 
+			            <h:commandLink>
+			                <p:graphicImage name="/demo/images/pdf.png" width="24"/>
+			                <p:dataExporter type="pdf" target="tbl" fileName="cars"/>
+			            </h:commandLink>
+			 
+			            <h:commandLink>
+			                <p:graphicImage name="/demo/images/csv.png" width="24"/>
+			                <p:dataExporter type="csv" target="tbl" fileName="cars" />
+			            </h:commandLink>
+			 
+			            <h:commandLink>
+			                <p:graphicImage name="/demo/images/xml.png" width="24"/>
+			                <p:dataExporter type="xml" target="tbl" fileName="cars" />
+			            </h:commandLink>
+			        </f:facet>
+			        
 					    <p:column headerText="Id">
 					        <h:outputText value="#{prod.id}" />
 					    </p:column>

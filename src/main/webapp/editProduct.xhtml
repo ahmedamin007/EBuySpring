@@ -11,7 +11,7 @@
    
     
 	<ui:define name="content">
-		<h3>Add Product</h3> <br/>
+		<h3>Edit Product</h3> <br/>
 	    <div >
 	      
 			<h:form>
@@ -47,24 +47,22 @@
 			                <f:validateDoubleRange minimum="0" maximum="1000000"/>
 			            </p:inputText>
 			            <p:message for="stock" id="stockMessage" display="icon" />
-			           
+			            
 				        <p:outputLabel for="type" value="Category:" />
 				        <p:selectOneMenu id="type" value="#{productBean.selection}"  style="width:125px">
 				            <f:selectItems value="#{productBean.productTypeService.findAll()}" var="prod"  
 				            			   itemValue="#{prod.id}"  itemLabel="#{prod.name}" />
 				        </p:selectOneMenu>
 			          
+			           <img src="http:\\localhost\D\img\1.jpg" alt="" />
+			           
 			        </h:panelGrid>
 			 
-			        <p:commandButton value="Save" update="panel" actionListener="#{productBean.saveNew()}" icon="ui-icon-check"  />
+			        <p:commandButton value="Save" update="panel" action="#{productBean.saveUpdate()}" icon="ui-icon-check"  />
 			    	<p:commandButton action="/product.jsf" value="Return"  immediate="true" />
 			    </p:panel>
 			</h:form>
 	    
-			<h:form id="form" >
-			        <p:fileUpload  fileUploadListener="#{productBean.upload}"   
-									sizeLimit="200000" description="Select Images"/>
-			</h:form>
 	      </div>
 	</ui:define> 
 

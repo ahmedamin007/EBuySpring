@@ -27,7 +27,7 @@ public class ProductService {
 	
 	public void update(String productName, String desc, double price ,ProductType productType , int stock,  int id) {
 		productRepository.setProductById(productName, desc, price, productType, stock, id);
-	}	
+	}
 	
 	public List<Product> findAll(){
 		return productRepository.findAll();

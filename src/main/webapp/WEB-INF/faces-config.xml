@@ -10,4 +10,9 @@
 	        org.springframework.web.jsf.el.SpringBeanFacesELResolver
 	    </el-resolver>
 	</application>
+	
+	 <init-param>
+		 <param-name>uploadDirectory</param-name>
+		 <param-value>/img</param-value>
+	 </init-param>
 </faces-config>

@@ -10,6 +10,9 @@ import javax.persistence.Table;
 @Table(name="ProductType")
 public class ProductType {
 
+
+
+
 	@Id @GeneratedValue
 	private int id;
 	private String name;
@@ -21,7 +24,20 @@ public class ProductType {
 
 	}
 
+	
+	
+	public ProductType(int id, String name, String desc) {
+		super();
+		this.id=id;
+		this.name = name;
+		this.desc = desc;
+	}
 
+	@Override
+	public String toString() {
+		return this.name ;
+	}
+	
 	public ProductType( String name, String desc) {
 		super();
 		this.name = name;

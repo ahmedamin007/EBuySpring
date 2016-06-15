@@ -83,7 +83,9 @@
 					        actionListener="#{productBean.delete(prod.id)}" value="Delete"     />
 					    </p:column>
 
-
+					    <p:column headerText="Users Comments">
+					        <h:commandLink action="#{customerCommentBean.findByProduct(prod.id)}" value="Show Comments"     />
+					    </p:column>
 						 
 					</p:dataTable>
 

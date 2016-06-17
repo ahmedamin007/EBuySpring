@@ -1,6 +1,8 @@
 package com.ebuy.repository;
 
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +20,7 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
 	public void setProductById(String productName, String desc,  double price ,ProductType productType , int stock,  int id);
 	public Product findByProductName(String productName); 
 	public Product findById(int id);
-	
+	//Zeilem
+	public List<Product> findByProductType_id(int id);
 	//
 }

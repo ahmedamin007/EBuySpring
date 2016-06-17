@@ -10,8 +10,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.ebuy.model.Person;
+import com.ebuy.service.PersonService;
 
 
 
@@ -20,19 +23,36 @@ import org.springframework.stereotype.Component;
 @SessionScoped
 public class loginBean implements Serializable  {
 
-	/**
-	 * 
-	 */
+	
+	@Autowired
+	PersonService personService ;
+	
+	
 	private static final long serialVersionUID = 1L;
 	
 	private String username;
 	private String passowrd;
 	private boolean admin;
 	private String error;
+
+	private Person person=new Person();
 	
-	
+	/////////
+	public PersonService getPersonService() {
+		return personService;
+	}
 
 	
+	/////////////
+	public void setPersonService(PersonService personService) {
+		this.personService = personService;
+	}
+
+
+	public String logout(){
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "/tempLogin.jsf?faces-redirect=true";
+	}
 	public String getError() {
 		return error;
 	}
@@ -43,28 +63,48 @@ public class loginBean implements Serializable  {
 
 	@PostConstruct
 	public void init(){
-		username="ahmed";
+		System.out.println("init......");
+		this.username="ahmedamin";
+		setUsername("ahmedamin");
+		this.person=personService.findByUserName(username);
+		System.out.println("init......2");
 		admin=true;
 	}
 	
+	public Person getPerson() {
+		return person;
+	}
+
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+
+	public Person findPerson(){
+		
+		return personService.findByUserName(username);
+	}
+	
+	public String getfirstName(){
+		return personService.findByUserName(username).getFirstName();
+	}
+	
+	
+	public String getlastName(){
+		return personService.findByUserName(username).getLastName();
+	}
+
 	public String getLocation() throws UnknownHostException{
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 		        .getRequest();
-		
 
-		
-		
 		String ip = request.getRemoteAddr();
 		if (ip.equalsIgnoreCase("0:0:0:0:0:0:0:1")) {
 		    InetAddress inetAddress = InetAddress.getLocalHost();
 		    String ipAddress = inetAddress.getHostAddress();
 		    ip = ipAddress;
 		    System.out.println("ipAddress:>>>>  "+ip);
-		    
-		   // System.out.println("ipAddress:>>>>  "+ LocactionService.getLocationService(ip));
-		    
-		    
-		  // System.out.println("ipAddress:>>>>  "+ LocactionService.getLocationService(ip));
 		    
 		}
 		return "/adminHome.jsf";
@@ -97,23 +137,8 @@ public class loginBean implements Serializable  {
 		
 
     public String login(){
-//        Login doLogin =new Login();
-//        if (doLogin.login(username, passowrd) ){
-//            if (doLogin.isAdmin() ) 
-//                setAdmin(1);
-//            
-//            else
-//               setAdmin(0); 
-//            
-//           setLoginUserName(doLogin.getUserName()); 
-//           return "home.jsf";
-//        }
-//        else{
-//            setError("Invalid user name of passowrd..");
-//            return "login.jsf";
-//        }
+
     	System.out.println("enter login");
-		this.username="ahmedamin";
 		setUsername("ahmedamin");
 		
 		admin=true;
@@ -149,4 +174,8 @@ public class loginBean implements Serializable  {
 		
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 }

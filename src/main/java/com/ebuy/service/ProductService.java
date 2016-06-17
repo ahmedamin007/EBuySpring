@@ -1,5 +1,6 @@
 package com.ebuy.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class ProductService {
 
 	@Autowired
 	ProductRepository productRepository;
+	
+	///////Zeliam
+	List<Product> pro=new ArrayList<>();
 	
 	public ProductService() {
 		// TODO Auto-generated constructor stub
@@ -43,5 +47,17 @@ public class ProductService {
 		productRepository.delete(product);
 		
 	}
-
+	
+	
+	////////////Zeilam
+	
+	public List<Product> findByProductType_id(int id){
+		pro=productRepository.findByProductType_id(id);
+	return pro;
+	}
+	
+	public List<Product> getPro() {
+		return pro;
+	}
+	////////////
 }

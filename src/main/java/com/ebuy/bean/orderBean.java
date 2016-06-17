@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import com.ebuy.model.Order;
 import com.ebuy.model.Orderline;
+import com.ebuy.model.Product;
 import com.ebuy.service.MailService;
 import com.ebuy.service.OrderLineService;
 import com.ebuy.service.OrderService;
@@ -34,9 +35,9 @@ public class orderBean {
 	@Autowired
 	OrderLineService orderLineService;
 	
-	
 	List<Orderline> orderLineList=new ArrayList<>();
 	List<Order> orderList=new ArrayList<>();
+	
 	private Date date;
 	private boolean checkOut;
 	private boolean selectAll;
@@ -84,12 +85,25 @@ public class orderBean {
 		return "/orderView.jsf";
 	}
 	
+	
 	public String deleteOrderDetail(int id) {
 		orderLineService.delete(orderLineService.findById(id));
 		return "/orderView.jsf";
 	}
 	
+	////////////zelalem
 	
+	public String deleteOrder(Orderline oline){
+		orderLineService.deleteOrder(oline);
+		return null;
+	}
+	
+	public String listOrder(Product product,int quantity){
+		orderLineService.listOrder(product,quantity);
+		return null;
+	}
+	
+	//////////////////
 	public String findOrderByDate(){
 		orderList=orderService.findByOrderDateOrCheckOutFlag(this.date, this.checkOut);
 		

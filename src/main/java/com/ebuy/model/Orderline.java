@@ -24,6 +24,16 @@ public class Orderline {
 	private double price;
 	private double subtotal;
 	
+	
+	public Orderline(Product product,int quantity, double price, double subtotal) {
+		super();
+		
+		this.quantity = quantity;
+		this.product = product;
+		this.price = price;
+		this.subtotal = subtotal;
+	}
+	
 	public int getQuantity() {
 		return quantity;
 	}

@@ -27,6 +27,7 @@
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
                     #{cpy['msg.copyright']}<br/>
                     welcome #{loginBean.username} 
+                    <p:commandLink action="#{loginBean.logout()}" value="Logout" />  
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="100" closable="true" collapsible="true">

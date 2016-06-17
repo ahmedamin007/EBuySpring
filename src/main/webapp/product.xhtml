@@ -6,12 +6,12 @@
                                                              xmlns:f="http://java.sun.com/jsf/core"> 
     
     <ui:define name="windowTitle">
-		Product
+		Product  
 	</ui:define>
    
     
 	<ui:define name="content">
-		<p:panel id="panel" header="Product">
+		<p:panel id="panel" header="Product welcome #{loginBean.username}">
 		
              <p>
                  
@@ -84,9 +84,13 @@
 					    </p:column>
 
 					    <p:column headerText="Users Comments">
-					        <h:commandLink action="#{customerCommentBean.findByProduct(prod.id)}" value="Show Comments"     />
+					        <h:commandLink action="#{customerCommentBean.findByProductViewOnly(prod.id)}" value="Count #{customerCommentBean.getCommentCount(prod.id)}"     />
 					    </p:column>
-						 
+	
+					    <p:column headerText="Add Comments">
+					        <h:commandLink action="#{customerCommentBean.findByProductReadWrite(prod.id)}" value="Add"     />
+					    </p:column>
+					    
 					</p:dataTable>
 
 	          </h:form> 

@@ -22,8 +22,19 @@
     </properties>
     
 
+
+	<!-- location -->
+	
+
     
     <dependencies>
+    
+
+    <dependency>
+        <groupId>com.maxmind.geoip2</groupId>
+        <artifactId>geoip2</artifactId>
+        <version>2.7.0</version>
+    </dependency>
     
 	<dependency>
 	    <groupId>org.primefaces</groupId>

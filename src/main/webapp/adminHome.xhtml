@@ -8,10 +8,16 @@
 
     <f:view contentType="text/html">
         <h:head>
+
+			 <h:outputScript library="primefaces" name="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" target="head" />
+        	<!--  <h:outputScript library="js" name="locservice.js"  />   -->
+        
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
                 <title><ui:insert name="windowTitle"/></title>
             </f:facet>
+            
+    
         </h:head>
 
         <h:body >
@@ -19,11 +25,12 @@
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    Header head
+                    #{cpy['msg.copyright']}<br/>
+                    welcome #{loginBean.username} 
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
+                    #{cpy['footer.copyright']}
                 </p:layoutUnit>
 
                 <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
@@ -42,15 +49,30 @@
 
                 </p:layoutUnit>
 
+
                 <p:layoutUnit position="center">
-                
+
+
+
+<!-- 				<h:form>
+			         <h:outputText ip="city"  value="city" /> <br/>
+			         <h:outputText ip="region-code" value="region"  /><br/>
+			         <h:outputText ip="test" value="test"  /><br/>
+			         
+	            	 <h:commandButton id="getnav" value="Location" onclick=" getloc() ; " />
+				</h:form> -->
+            
 			    <div id="content"   >
+
 			        <ui:insert name="content"/>
 			    </div>
 				 
                 </p:layoutUnit>
 
             </p:layout>
+
+
+
 
         </h:body>
 

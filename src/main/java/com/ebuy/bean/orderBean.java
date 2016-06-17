@@ -8,15 +8,20 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ebuy.model.Order;
 import com.ebuy.model.Orderline;
-import com.ebuy.model.Product;
+import com.ebuy.service.MailService;
 import com.ebuy.service.OrderLineService;
 import com.ebuy.service.OrderService;
+
 
 @Component
 @ManagedBean
@@ -29,6 +34,7 @@ public class orderBean {
 	@Autowired
 	OrderLineService orderLineService;
 	
+	
 	List<Orderline> orderLineList=new ArrayList<>();
 	List<Order> orderList=new ArrayList<>();
 	private Date date;
@@ -40,11 +46,27 @@ public class orderBean {
 		
 	}
 	
-	public String updateCheckOut(){
+	@Transactional(value=TxType.REQUIRED)
+	public String updateCheckOut() throws AddressException, MessagingException{
+		int counter=0;
+		int failCounter=0;
         for (Order ord: orderList){
-        	System.out.println("before update ...." + ord.isCheckOutFlag() + " "  + ord.getId());
         	orderService.updateOrderCheckOut(ord.isCheckOutFlag(), ord.getId());
+        	
+        	if (ord.getPerson().getEmail()!= null && !ord.getPerson().getEmail().equals("") ){
+	        	if (MailService.sendEmail( ord.getPerson().getEmail(), 
+	        			"You order No. " +  ord.getId()  + "has been dispatched and ready to shippment ", 
+	        			"ebuy-order No." + ord.getId()) ) {
+	        			counter++;
+	        	}
+	        	else {
+	        		failCounter++;
+	        	}
+        	}
         }
+        
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage("Successful saved " + counter +  " mails sent, " + failCounter + " failed "  ,  "Successful Saved... " ) );
 		return "/orderDetails.jsf";
 	}
 

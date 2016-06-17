@@ -6,25 +6,33 @@
                 xmlns:f="http://java.sun.com/jsf/core"> 
     
     <ui:define name="windowTitle">
-		Product
+		Comments
 	</ui:define>
    
     
 	<ui:define name="content">
 	<p:panel id="panel" header="Users Comments">
 		<h:form> 
+
+		  
+		   <h:panelGrid columns="1" cellpadding="2">
+	           <h:graphicImage id="image" value="resources/images/#{customerCommentBean.currentProductId}.jpg" 
+	           alt="image not available"  width="200px" height="130px" />
+	 		   #{customerCommentBean.currentProductName}<br/>
+			   #{customerCommentBean.currentProductDesc}
+			   <p:commandButton action="/product.jsf" value="Return"  immediate="true" />
+		   </h:panelGrid>
 		    <p:dataScroller value="#{customerCommentBean.customerCommentList}" var="cmt" chunkSize="10">
  		        <f:facet name="header">
-		            Scroll Down to Load More comments
+		            User comment #{customerCommentBean.currentProductName}
+		            
 		        </f:facet> 
 		 
 		        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
-		           <!--  <p:graphicImage name="demo/images/car/#{car.brand}-big.gif" />  -->
+
 		 
 		            <p:outputPanel>
 		                <h:panelGrid columns="2" cellpadding="5">
-		                    <h:outputText value="Product:" />
-		                    <h:outputText value="#{cmt.product.productName}" style="font-weight: bold"/>
 		 
 		                    <h:outputText value="User:" />
 		                    <h:outputText value="#{cmt.person.username}" style="font-weight: bold"/>
@@ -32,12 +40,12 @@
 		                    <h:outputText value="Date:" />
 		                    <h:outputText value="#{cmt.commentDate}" style="font-weight: bold"/>
 		                    
-		                    <h:outputText value="Date:" />
+		                    <h:outputText value="Comment:" />
 		                    <h:outputText value="#{cmt.commentText}" style="font-weight: bold"/>
 		                    
   							<h:outputText value="rating:" />
-        					<p:rating value="#{cmt.rating}" stars="10"  />
- 
+        					<p:rating value="#{cmt.rating}" stars="10" readonly="true" />
+ 							
 		                </h:panelGrid>
 		            </p:outputPanel>
 		        </h:panelGrid>

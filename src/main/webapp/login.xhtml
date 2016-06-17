@@ -1,70 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-      
-   		<f:loadBundle basename="resources" var="msg" />
-		<head>
-		<title><ui:insert name="pageTitle">Page Title</ui:insert></title>
-		<style type="text/css">
-			body {
-				  font-family: Verdana, Arial, Helvetica, sans-serif;
-				  font-size: 14px;
-			}
-			.header {
-				  font-family: Verdana, Arial, Helvetica, sans-serif;
-				  font-size: 18px;
-			}
-			.bottom {
-				  font-family: Verdana, Arial, Helvetica, sans-serif;
-				  font-size: 9px;
-				  text-align: center;
-				  vertical-align: middle;
-				  color: #8E969D;
-			}
-		</style>
-		</head>
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> </meta>
+        <title>Students Web Service</title><!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> </link>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
-<body bgcolor="#ffffff">
-<table style="border:1px solid #CAD6E0"  align="center" cellpadding="0" cellspacing="0" border="0" width="400">
-<tbody>
-
-	<tr>
-		<td class="header" height="42" align="center" valign="middle" width="100%" bgcolor="#E4EBEB">
-			<ui:insert name="pageHeader">Page Header</ui:insert>
-		</td>
-	</tr>
-	<tr>
-		<td height="1" width="100%" bgcolor="#CAD6E0"></td>
-	</tr>	
-
-	<tr>
-		<td width="100%"  colspan="2">
-			<table width="100%" style="height:150px" align="left" cellpadding="0" cellspacing="0" border="0">
-			<tbody>
-				<tr>
-					<td align="center" width="100%" valign="middle">
-					
-					<ui:insert name="body">
-						<h:form>
-							Username <p:inputText value="" />
-						</h:form>
-					</ui:insert>
-					
-					</td>
-				</tr>
-			</tbody>
-			</table>
-		</td>
-	</tr>	
-	
-	<tr>
-		<td colspan="2"  valign="bottom" height="1" width="100%" bgcolor="#CAD6E0"></td>
-	</tr>
-</tbody>
-</table>
-</body>
-		
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    </head>
+    <h:body class="bg-success ">
+            
+            <br/>
+            <br/>
+            
+          <div  class="col-md-3 col-md-offset-4">
+            <p>
+                Please login to continue 
+            </p> 
+            <h:form >
+                User name <h:inputText id = "username" label="User name" class="form-control"  
+                  value="#{loginBean.username}" required="true" /> <br/>
+                <h:message for="username" style="color: red"/>
+                Password <h:inputSecret id = "password" label="Password" class="form-control"  value="#{loginBean.passowrd}" required="true" /><br/><br/>
+                            <h:message for="password" style="color: red"/>
+                    <h:commandButton  class="btn btn-info" style="width: 100px;height: 30px;"  value="Start" action="#{loginBean.login()}"/>
+            </h:form> 
+              <font style="color: red" ><p> #{loginBean.error} </p> </font>
+          </div>
+            <br/>
+            <br/>
+            <div class="col-md-offset-4" style="clear: both;">
+                #{cpy['msg.copyright']}
+            </div>
+    </h:body>
 </html>
+

@@ -13,5 +13,6 @@ public interface CustomerCommentRepository  extends JpaRepository<CustomerCommen
 
 	public List<CustomerComment> findByProduct(Product product);
 	
+	
 
 }

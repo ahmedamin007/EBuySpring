@@ -23,6 +23,7 @@ public class CustomerCommentService {
 	}
 
 	public List<CustomerComment> findAll(){
+		
 		return commentRepository.findAll();
 	}
 

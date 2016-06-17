@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ebuy.model.Order;
 import com.ebuy.model.Orderline;
+import com.ebuy.model.Person;
+import com.ebuy.model.Product;
 import com.ebuy.repository.OrderLineRepository;
 
 @Service
@@ -37,6 +39,10 @@ public class OrderLineService {
 	
 	public Orderline findById(int id){
 		return orderLineRepository.findById(id);
+	}
+	
+	public  List<Order> findByProductAndOrder(Product product,Person person){
+		return orderLineRepository.findByProductAndOrder(product, person);
 	}
 
 }

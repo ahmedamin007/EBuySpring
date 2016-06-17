@@ -18,7 +18,7 @@ public class CustomerComment {
 
 	@Id @GeneratedValue
 	private int id;
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date commentDate;
 	@OneToOne
 	private Person person;

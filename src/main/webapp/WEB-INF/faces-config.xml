@@ -9,7 +9,14 @@
 	    <el-resolver>
 	        org.springframework.web.jsf.el.SpringBeanFacesELResolver
 	    </el-resolver>
+	    
+	   <resource-bundle>
+			<base-name>com..ebuy.pack.copyright</base-name>
+			<var>cpy</var>
+	    </resource-bundle>
 	</application>
+	
+
 	
 	 <init-param>
 		 <param-name>uploadDirectory</param-name>

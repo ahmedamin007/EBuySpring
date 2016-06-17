@@ -1,0 +1,60 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title><ui:insert name="windowTitle"/></title>
+            </f:facet>
+        </h:head>
+
+        <h:body >
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    Mum.edu.WAA.Project
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    Mum.edu.WAA.Project
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+
+
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                
+            <h:form >
+                User name <h:inputText id = "username" label="User name" class="form-control"  
+                  value="#{loginBean.username}" required="true" /> <br/>
+                <h:message for="username" style="color: red"/>
+                Password <h:inputSecret id = "password" label="Password" class="form-control"  value="#{loginBean.passowrd}" required="true" /><br/><br/>
+                            <h:message for="password" style="color: red"/>
+                    <h:commandButton  class="btn btn-info" style="width: 100px;height: 30px;"  
+                    value="Start" action="#{loginBean.login()}"/>
+            </h:form> 
+            
+			    <div id="content"   >
+			        <ui:insert name="content"/>
+			    </div>
+				 
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
+

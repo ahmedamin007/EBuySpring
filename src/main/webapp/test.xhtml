@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+      
+
+		<head>
+		<title><ui:insert name="pageTitle">Page Title</ui:insert></title>
+<!-- 		<h:outputScript library="javascript" name="locservice.js"    />   -->
+		
+		
+<!--   		<h:outputScript library="text/javascript" 
+				name="/js/jquery-3.0.0.min.js" />   --> 
+
+		
+  		<h:outputScript type="text/javascript" 
+				src="resources/js/jquery-3.0.0.min.js" />   
+		</head>
+
+<body bgcolor="#ffffff">
+
+
+<p id="region-name"></p>
+<p id="areacode"></p>
+<p id="ip"></p>
+<p id="zipcode"></p>
+<p id="longitude"></p>
+<p id="latitude"></p>
+<p id="country-name"></p>
+<p id="country-code"></p>
+<p id="city"></p>
+<p id="region-code"></p>
+
+
+<h:form>
+        <h:outputText ip="test" value="test"  /><br/>
+        
+         	 <h:commandButton id="getnav" value="Location" onclick=" getloc() ; " />
+
+		<h:commandButton   value="okoko"
+		      onclick=" 
+		    	  alert('You will lose all changes made. Are you sure?') 
+			  jQuery.ajax( {
+				  url: '//freegeoip.net/json/',
+				  type: 'POST',
+				  dataType: 'jsonp',
+				  success: function(location) {			
+					  alert(location.city);
+				  }
+				} );
+
+				
+			      "
+		/>
+
+         	 
+</h:form>layan ahmed
+	
+</body>
+		
+</html>

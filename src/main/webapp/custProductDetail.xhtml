@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+         <h:outputStylesheet library="css" name="style.css"  />
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit id="id1" position="north" size="50" resizable="true" closable="true" collapsible="true">
+                    <div align="right" >
+                    <div align="left" style="float: left;font-size: 13px;">
+	                    #{cpy['msg.copyright']} <br/>
+	                    welcome #{loginBean.username} 
+                    </div>
+                   <p:commandLink action="registrationForm.xhtml" value="Registration" />
+<!--                    this is for regi and login -->
+                    <p:commandLink action="loginForm.xhtml" value="Login" />
+
+                    </div>
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                   <div align="left" style="float: left;font-size: 13px;">
+                   #{cpy['footer.copyright']}
+                   </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="ProductList" collapsible="true">
+                   
+                    <p:growl autoUpdate="true"/>
+				  <h:form>
+                    <p:menu>
+                    
+                        <p:submenu label="ProductType">
+                        
+                            <p:menuitem value="Computer"   icon="ui-icon-arrowthick-1-s" action="#{productBean.proByType()}"  ajax="false"/>
+                            
+                            <p:menuitem value="Tv" icon="ui-icon-arrowthick-1-s" action="#{productBean.proByTypeTv()}"  ajax="false" />
+                           <p:menuitem value="Clothes" icon="ui-icon-arrowthick-1-s" action="#{productBean.proByTypeClo()}"  ajax="false" />
+                            <p:menuitem value="Shoes" icon="ui-icon-arrowthick-1-s" action="#{productBean.proByTypeShoe()}"  ajax="false" />
+                            
+                            <p:menuitem value="All" icon="ui-icon-arrowthick-1-s" action="#{productBean.listProduct()}"  ajax="false" />
+                        </p:submenu>
+                  
+                    </p:menu>
+                    </h:form> 
+                </p:layoutUnit>
+                 <p:layoutUnit position="east" size="175" header="Cart" collapsible="true">
+
+             <h:outputText value="#{orderBean.orderLineService.listSize()}" /><br />
+             <h:outputLabel>TotalPrice: </h:outputLabel>
+             <h:outputText value="#{orderBean.orderLineService.totPrice()}" /><br />
+             <h:form>
+             <h:commandButton action="checkOutPro" value="CheckOut" />
+             </h:form>
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
+                 <p:layout>
+                 <p:layoutUnit position="center" size="30%">
+     <h:form id="form">
+        <p:dataGrid var="product" value="#{productBean.findById()}"   rows="3"  >
+    
+ 
+ 
+        <p:panel header="#{product.productName}" style="text-align:center;" >
+            <h:panelGrid columns="1" style="width:333px;">
+            <h:graphicImage value="resources/images/#{product.id}.jpg"  width="50px"  height="50px"/> 
+<!--             <h:outputText value="#{product.productType}"/> -->
+            <h:outputText value="#{product.productName}" />
+             <h:outputText value="#{product.desc}" />
+                <h:outputLabel>Price: <h:outputText  value="#{product.price}" /></h:outputLabel>
+                <h:outputLabel>Qty: <h:outputText  value="#{product.stock}" /></h:outputLabel>
+                 <h:selectOneMenu  value="#{orderBean.orderLineService.quantity}" style="width:50px">
+               <f:selectItem itemValue="1" itemLabel="1" />
+   	        <f:selectItem itemValue="2" itemLabel="2" />
+          	<f:selectItem itemValue="3" itemLabel="3" />
+          	<f:selectItem itemValue="4" itemLabel="4" />
+         	<f:selectItem itemValue="5" itemLabel="5" /> 
+            </h:selectOneMenu>
+
+
+                <h:commandButton action="#{orderBean.listOrder(product,orderBean.orderLineService.quantity)}" value="Add" />
+            </h:panelGrid>
+        </p:panel>
+ 
+    </p:dataGrid>
+</h:form>
+<!-- aslllllllll -->
+</p:layoutUnit>
+                
+       <p:layoutUnit position="south" size="35%" >
+                    Customers who Bought This Item also bought
+     <h:form id="form2">
+      <p:dataGrid var="prod" value="#{productBean.productService.pro}" 
+      columns="3" layout="grid"
+        rows="12" paginator="true" id="products"
+        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+        rowsPerPageTemplate="6,12,16">
+ 
+        <p:panel header="#{prod.productName}" style="text-align:center">
+            <h:panelGrid columns="1" style=" width : 333px;">
+             <h:commandLink action="#{productBean.proDesc(prod.id,prod.productType)}" value="" >  <h:graphicImage value="resources/images/#{prod.id}.jpg"  width="50px"  height="50px"/> </h:commandLink>
+ 
+            <h:outputText value="#{prod.productName}" />
+                 
+            </h:panelGrid>
+        </p:panel>
+ 
+ 
+ 
+    </p:dataGrid>
+
+	</h:form>
+	
+	<p:panel id="panel" header="Users Comments - welcome #{loginBean.username}">
+		<h:form> 
+			<h:form>
+				<p:growl id="growl" showDetail="true" sticky="true" />
+				  
+			    <p:panel id="panel" header="Comment">
+			 
+			        <p:messages id="msgs" />
+			 
+			        <h:panelGrid columns="3" cellpadding="5">
+			        
+			            	<p:outputLabel for="comment" value="Comment:" />
+							<p:inputTextarea id="comment" rows="7" cols="50" value="#{productBean.userComment}" 
+								queryDelay="750" minQueryLength="4" required="true" validator="#{productBean.validateComment}" />		
+			            <p:message for="msgs" display="icon" />
+			            
+				        <p:outputLabel for="rate" value="Rating:" />
+				        <p:rating id="rate" stars="10" value="#{productBean.rating}"  required="true" />
+
+			     </h:panelGrid>
+			     	 <p:commandButton value="Post" update="panel" 
+				        	action="#{productBean.saveUserComent()}" icon="ui-icon-check"  />
+				     <p:commandButton action="/product.jsf" value="Return"  immediate="true" />
+			     </p:panel>
+			</h:form>
+		    <p:dataScroller value="#{productBean.customerCommentList}" var="cmt" chunkSize="10">
+ 		        <f:facet name="header">
+		            User comment #{productBean.currentProductName}
+		        </f:facet> 
+		 
+		        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+
+		 
+		            <p:outputPanel>
+		                <h:panelGrid columns="2" cellpadding="5">
+		 
+		                    <h:outputText value="User:" />
+		                    <h:outputText value="#{cmt.person.username}" style="font-weight: bold"/>
+		 
+		                    <h:outputText value="Date:" />
+		                    <h:outputText value="#{cmt.commentDate}" style="font-weight: bold"/>
+		                    
+		                    <h:outputText value="Comment:" />
+		                    <h:outputText value="#{cmt.commentText}" style="font-weight: bold"/>
+		                    
+  							<h:outputText value="rating:" />
+        					<p:rating value="#{cmt.rating}" stars="10" readonly="true" />
+ 							
+		                </h:panelGrid>
+		            </p:outputPanel>
+		        </h:panelGrid>
+		    </p:dataScroller>
+		</h:form>
+	 </p:panel>
+
+                </p:layoutUnit>
+                </p:layout>
+
+                </p:layoutUnit>
+            </p:layout>
+        </h:body>
+
+    </f:view>
+</html>

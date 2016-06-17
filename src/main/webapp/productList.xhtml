@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+<!--            <h:outputStylesheet library="css" name="style.css"  /> -->
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true" >
+              
+                <p:layoutUnit  position="north" size="50" resizable="true" closable="true" collapsible="true">
+                    <div align="right" >
+                    <div align="left" style="float: left;font-size: 13px;">
+	                    #{cpy['msg.copyright']} <br/>
+	                    welcome #{loginBean.username} 
+                    </div>
+
+                   <p:commandLink action="registrationForm.xhtml" value="Registration" />
+<!--                    this is for regi and login -->
+                    <p:commandLink action="loginForm.xhtml" value="Login" />
+
+                    </div>
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="50" closable="true" collapsible="true" >
+                   <div align="left" style="float: left;font-size: 13px;">
+                   #{cpy['footer.copyright']}
+                   </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="ProductList" collapsible="true" >
+                   
+                    <p:growl autoUpdate="true"/>
+				  <h:form>
+                    <p:menu>
+                    
+                        <p:submenu label="ProductType">
+                        
+                            <p:menuitem value="Computer"   icon="ui-icon-arrowthick-1-s" action="#{productBean.proByType()}"  ajax="false"/>
+                            
+                            <p:menuitem value="Tv" icon="ui-icon-arrowthick-1-s" action="#{productBean.proByTypeTv()}"  ajax="false" />
+                            <p:menuitem value="Clothes" icon="ui-icon-arrowthick-1-s" action="#{productBean.proByTypeClo()}"  ajax="false" />
+                            <p:menuitem value="Shoes" icon="ui-icon-arrowthick-1-s" action="#{productBean.proByTypeShoe()}"  ajax="false" />
+                            <p:menuitem value="All" icon="ui-icon-arrowthick-1-s" action="#{productBean.listProduct()}"  ajax="false" />
+                        </p:submenu>
+                  
+                    </p:menu>
+                    </h:form> 
+                </p:layoutUnit>
+                 <p:layoutUnit position="east" size="175" header="Cart" collapsible="true">
+
+             <h:outputText value="#{orderBean.orderLineService.listSize()}" /><br />
+             <h:outputLabel>TotalPrice: </h:outputLabel>
+             <h:outputText value="#{orderBean.orderLineService.totPrice()}" /><br />
+             <h:form>
+             <h:commandButton action="checkOutPro" value="CheckOut" />
+             </h:form>
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
+                    
+                    <h:form id="form">
+    <p:dataGrid var="product" value="#{productBean.productService.findAll()}" style="
+                    background-color: Yellow"  >
+<!--      columns="3" layout="grid"  -->
+<!--         rows="12" paginator="true" id="products" -->
+<!--         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" -->
+<!--         rowsPerPageTemplate="6,12,16"> -->
+ 
+<!--         <f:facet name="header"> -->
+<!--            Product for Sale  #{product.productType} -->
+<!--         </f:facet> -->
+       
+        <p:panel header="#{product.productName}" style="text-align:center">
+            <h:panelGrid columns="1" style=" width : 333px;">
+           <h:commandLink action="#{productBean.proDesc(product.id,product.productType)}" value="" >  <h:graphicImage value="resources/images/#{product.id}.jpg"  width="50px"  height="50px"/> </h:commandLink>
+ 
+            <h:outputText value="#{product.productName}" />
+            
+                <h:outputLabel>Price: <h:outputText  value="#{product.price}" /></h:outputLabel>
+                <h:outputLabel>Qty: <h:outputText  value="#{product.stock}" /></h:outputLabel>
+<!--                  <h:selectOneMenu  value="#{orderBean.orderLineService.quantity}" style="width:50px"> -->
+<!--                <f:selectItem itemValue="1" itemLabel="1" /> -->
+<!--    	        <f:selectItem itemValue="2" itemLabel="2" /> -->
+<!--           	<f:selectItem itemValue="3" itemLabel="3" /> -->
+<!--           	<f:selectItem itemValue="4" itemLabel="4" /> -->
+<!--          	<f:selectItem itemValue="5" itemLabel="5" />  -->
+<!--             </h:selectOneMenu> -->
+<!--               <h:outputText  value="#{product.stock}" /> -->
+
+                <h:commandButton action="#{orderBean.listOrder(product,orderBean.orderLineService.quantity)}" value="Add" />
+<!--                     <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" /> -->
+                   
+               
+            </h:panelGrid>
+        </p:panel>
+ 
+    </p:dataGrid>
+ 
+  
+</h:form>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>

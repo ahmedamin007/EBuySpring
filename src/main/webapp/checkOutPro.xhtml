@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+         <h:outputStylesheet library="css" name="style.css"  />
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                     <div align="right" >
+                    <div align="left" style="float: left;font-size: 13px;">
+	                    #{cpy['msg.copyright']} <br/>
+	                    welcome #{loginBean.username} 
+                    </div>
+                   <p:commandLink action="registrationForm.xhtml" value="Registration" />
+<!--                    this is for regi and login -->
+                    <p:commandLink action="loginForm.xhtml" value="Login" />
+                    </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                   <div align="left" style="float: left;font-size: 13px;">
+                   #{cpy['footer.copyright']}
+                   </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="ProductList" collapsible="true">
+                   
+                    <p:growl autoUpdate="true"/>
+				  <h:form>
+                    <p:menu>
+                    
+                        <p:submenu label="ProductType">
+                        
+                            <p:menuitem value="Computer"   icon="ui-icon-arrowthick-1-s" action="#{productBean.proByType()}"  ajax="false"/>
+                            
+                            <p:menuitem value="Tv" icon="ui-icon-arrowthick-1-s" action="#{productBean.proByTypeTv()}"  ajax="false" />
+                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
+                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+                            <p:menuitem value="All" icon="ui-icon-arrowthick-1-s" action="#{productBean.listProduct()}"  ajax="false" />
+                        </p:submenu>
+                  
+                    </p:menu>
+                    </h:form> 
+                </p:layoutUnit>
+           
+                <p:layoutUnit position="center">
+                    
+                    <h:form id="form">
+      <h:dataTable value="#{orderBean.orderLineService.orline}" border="2" var="prod">
+                <f:facet name="header">Your order is </f:facet>
+                <h:column >
+                    <f:facet name="header">Product Name</f:facet>
+                    
+<!--                     <h:inputText  value="#{prod.product.productName}"> -->
+                    
+<!--                     </h:inputText> -->
+                                       
+                    <h:outputText value="#{prod.product.productName}" />
+               
+                </h:column>
+				
+                
+                <h:column ><f:facet name="header">Product Description</f:facet>
+                
+<!--                     <h:inputText value="#{prod.product.desc}"  -->
+<!--                             size="10"/> -->
+                    <h:outputText value="#{prod.product.desc}" />
+                
+                </h:column>
+                
+				
+                <h:column ><f:facet name="header">Product Price</f:facet>
+                
+<!--                     <h:inputText id="amount" value="#{prod.product.price}"   -->
+<!--                                  size="10"> -->
+<!--                     </h:inputText> -->
+                    
+                    <h:outputText value="#{prod.product.price}" />
+                
+                </h:column>
+                
+   
+               		 <h:column >
+					<f:facet name="header"> Quantity</f:facet>
+					
+					<h:outputText value ="#{prod.quantity}" style="width:"/>
+					</h:column>
+                
+                <h:column>
+					<f:facet name="header"> SubTotal</f:facet>
+					
+					<h:outputText value ="#{prod.subtotal}"/>
+					</h:column>
+                
+<!--                  <h:column><f:facet name="header">Edit</f:facet> -->
+<!--                     <h:commandLink value="Edit" action="#{studentDataBase.editAction(student)}"  -->
+<!--                                rendered="#{not student.editable}"/> -->
+                
+<!--                 </h:column> -->
+                
+                <h:column><f:facet name="header">Remove Order</f:facet>
+                <h:commandLink value="remove" 
+                               action="#{orderBean.deleteOrder(prod)}"/>
+                </h:column>
+                
+          
+            </h:dataTable>
+            <br></br>
+            
+            <h:commandButton value="proceed to checkout" action="payment"/><span>  </span>
+            
+            <h:commandButton value="Back" action="productList"/>
+      
+ 
+  
+</h:form>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>

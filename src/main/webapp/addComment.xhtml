@@ -1,0 +1,77 @@
+<ui:composition template="/adminHome.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"> 
+    
+    <ui:define name="windowTitle">
+		Comments
+	</ui:define>
+   
+    
+	<ui:define name="content">
+	<p:panel id="panel" header="Users Comments - welcome #{loginBean.username}">
+		<h:form> 
+
+		   <h:panelGrid columns="1" cellpadding="2">
+	           <h:graphicImage id="image" value="resources/images/#{customerCommentBean.currentProductId}.jpg" 
+	           alt="image not available"  width="200px" height="130px" />
+	 		   #{customerCommentBean.currentProductName}<br/>
+			   #{customerCommentBean.currentProductDesc}
+		   </h:panelGrid>
+		   
+			<h:form>
+				<p:growl id="growl" showDetail="true" sticky="true" />
+				  
+			    <p:panel id="panel" header="New Product Type">
+			 
+			        <p:messages id="msgs" />
+			 
+			        <h:panelGrid columns="3" cellpadding="5">
+			        
+			            	<p:outputLabel for="comment" value="Comment:" />
+							<p:inputTextarea id="comment" rows="7" cols="50" value="#{customerCommentBean.userComment}" 
+								queryDelay="750" minQueryLength="4" required="true" validator="#{customerCommentBean.validateComment}" />		
+			            <p:message for="msgs" display="icon" />
+			            
+				        <p:outputLabel for="rate" value="Rating:" />
+				        <p:rating id="rate" stars="10" value="#{customerCommentBean.rating}"  required="true" />
+
+			     </h:panelGrid>
+			     	 <p:commandButton value="Post" update="panel" 
+				        	action="#{customerCommentBean.saveUserComent()}" icon="ui-icon-check"  />
+				     <p:commandButton action="/product.jsf" value="Return"  immediate="true" />
+			     </p:panel>
+			</h:form>
+		    <p:dataScroller value="#{customerCommentBean.customerCommentList}" var="cmt" chunkSize="10">
+ 		        <f:facet name="header">
+		            User comment #{customerCommentBean.currentProductName}
+		        </f:facet> 
+		 
+		        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+
+		 
+		            <p:outputPanel>
+		                <h:panelGrid columns="2" cellpadding="5">
+		 
+		                    <h:outputText value="User:" />
+		                    <h:outputText value="#{cmt.person.username}" style="font-weight: bold"/>
+		 
+		                    <h:outputText value="Date:" />
+		                    <h:outputText value="#{cmt.commentDate}" style="font-weight: bold"/>
+		                    
+		                    <h:outputText value="Comment:" />
+		                    <h:outputText value="#{cmt.commentText}" style="font-weight: bold"/>
+		                    
+  							<h:outputText value="rating:" />
+        					<p:rating value="#{cmt.rating}" stars="10" readonly="true" />
+ 							
+		                </h:panelGrid>
+		            </p:outputPanel>
+		        </h:panelGrid>
+		    </p:dataScroller>
+		</h:form>
+	 </p:panel>
+	</ui:define> 
+</ui:composition>

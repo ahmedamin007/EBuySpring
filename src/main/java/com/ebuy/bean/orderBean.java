@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.el.ELContext;
+import javax.el.ValueExpression;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -71,6 +73,31 @@ public class orderBean {
 		return "/orderDetails.jsf";
 	}
 
+	public String doCheckoutNavgaition(){
+		String currentUserName=null;
+		
+		try {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+		    ELContext elContext = facesContext.getELContext();
+		    ValueExpression targetExpression =
+		        facesContext.getApplication().getExpressionFactory().createValueExpression(elContext, "#{loginBean.username}", Object.class);
+		   
+		    currentUserName=targetExpression.getValue(elContext).toString();
+		    
+		}
+		catch (Exception ex) {
+			System.out.println("********user not logined " );
+	
+		}
+
+		
+		if (currentUserName==null){
+			System.out.println("********do navigation login" );
+			return "login";
+		}
+		else
+			return "payment";
+	}
 	public List<Orderline> findOrderLineByOrder(int id){
 		return orderLineService.findByOrder(orderService.findById(id));
 	}

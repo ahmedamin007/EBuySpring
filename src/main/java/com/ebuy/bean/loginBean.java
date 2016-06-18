@@ -51,6 +51,7 @@ public class loginBean implements Serializable  {
 
 	public String logout(){
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        
         return "/tempLogin.jsf?faces-redirect=true";
 	}
 	public String getError() {
@@ -63,12 +64,12 @@ public class loginBean implements Serializable  {
 
 	@PostConstruct
 	public void init(){
-		System.out.println("init......");
-		this.username="ahmedamin";
-		setUsername("ahmedamin");
-		this.person=personService.findByUserName(username);
-		System.out.println("init......2");
-		admin=true;
+//		System.out.println("init......");
+//		this.username="ahmedamin";
+//		setUsername("ahmedamin");
+//		this.person=personService.findByUserName(username);
+//		System.out.println("init......2");
+//		admin=true;
 	}
 	
 	public Person getPerson() {

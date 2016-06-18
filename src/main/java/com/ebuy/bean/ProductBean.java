@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.el.ELContext;
 import javax.el.ValueExpression;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
@@ -37,13 +39,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
  
 // ahmed amin
 
 @Component
 @ManagedBean
-@RequestScoped
-public class ProductBean {
+@SessionScoped
+public class ProductBean implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	ProductService productService;
@@ -70,6 +78,10 @@ public class ProductBean {
 	private Integer rating;
 	private String message;
 	
+	@PostConstruct
+	public void init(){
+		System.out.println("**************enter init ");
+	}
 
 	public String getCurrentProductName() {
 		return currentProductName;
@@ -345,20 +357,20 @@ public class ProductBean {
 		System.out.println("1");
 		List<Address> address = new ArrayList<>();
 		ProductType Computer=new ProductType("Computer","this is dell computer");
-		Product newProduct= new Product("Hp","this is dell computer",15.6,Computer,6);
-		Product newProduct1= new Product("Dell","this is dell computer",15.6,Computer,6);
-		ProductType TV=new ProductType("TV","this is tele");
-		Product newProduct2= new Product("tv","this is tv",50.4,TV,6);
-		Product newProduct3= new Product("SamTv","this is tv",75.3,TV,6);
-		ProductType Clothes=new ProductType("CL1","This is cloth");
-		Product newProduct4= new Product("cl1","This is cloth",15.8,Clothes,8);
-		Product newProduct5= new Product("cl2","This is cloth",23.5,Clothes,7);
-		Product newProduct6= new Product("cl3","This is cloth",35.2,Clothes,9);
-		ProductType Shoes=new ProductType("Shoes","This is Shoe type");
-		Product newProduct7= new Product("shoe1","This is shoe",15.8,Shoes,8);
-		Product newProduct8= new Product("shoe2","This is shoe",23.5,Shoes,7);
-		Product newProduct9= new Product("shoe3","This is shoe",35.2,Shoes,9);
-		Product newProduct10= new Product("shoe4","This is shoe",35.2,Shoes,9);
+		Product newProduct= new Product("Hp","Hp computer corei7",458,Computer,6);
+		Product newProduct1= new Product("Dell","Dell Computer intellcore4",400,Computer,6);
+		ProductType TV=new ProductType("TV","this is tv");
+		Product newProduct2= new Product("SamTv","Samsung TV",699,TV,6);
+		Product newProduct3= new Product("Toshiba","Toshiba Tv",75.3,TV,6);
+		ProductType Clothes=new ProductType("Jeans","cloth");
+		Product newProduct4= new Product("Trouser","trouser",30,Clothes,8);
+		Product newProduct5= new Product("Pants","Cloth",23.5,Clothes,7);
+		Product newProduct6= new Product("Surea","H&M",35.2,Clothes,9);
+		ProductType Shoes=new ProductType("Addidas","Addida shoe");
+		Product newProduct7= new Product("Timberland","Leather",15.8,Shoes,8);
+		Product newProduct8= new Product("Ascis","Sport shoe",23.5,Shoes,7);
+		Product newProduct9= new Product("Rebook","Rebook shoe",35.2,Shoes,9);
+		Product newProduct10= new Product("Nike","nike shoe",35.2,Shoes,9);
 		System.out.println("2");
 	   productTypeService.save(TV);
 	   productTypeService.save(Computer);
@@ -379,40 +391,40 @@ public class ProductBean {
 		return "faces/newjsf.xhtml";
 	}
   public String proByType(){
-      	productService.findByProductType_id(41);
+      	productService.findByProductType_id(2);
     return "computerList.xhtml";
 	//  return "productList.xhtml";
   }
   public String proByTypeClo(){
 	  
-    	productService.findByProductType_id(42);
+    	productService.findByProductType_id(3);
   return "computerList.xhtml";
 	//  return "productList.xhtml";
 }
   public String proByTypeShoe(){
 	  
-    	productService.findByProductType_id(43);
+    	productService.findByProductType_id(4);
   return "computerList.xhtml";
 	//  return "productList.xhtml";
 }
   public String proByTypeTv(){
-	    productService.findByProductType_id(40);
+	    productService.findByProductType_id(1);
 	    return "computerList.xhtml";
 		//  return "productList.xhtml";
 	  }
   public String proDesc(int id,String type){
      product=productService.findById(id);
         if(type.equals("Computer")){
-        	productService.findByProductType_id(41);
+        	productService.findByProductType_id(2);
         }
         else if(type.equals("Tv")){
-        	productService.findByProductType_id(40);
+        	productService.findByProductType_id(1);
         }
         else if(type.equals("Clothes")){
-        	productService.findByProductType_id(42);
+        	productService.findByProductType_id(3);
         }
         else if(type.equals("Shoes")){
-        	productService.findByProductType_id(43);
+        	productService.findByProductType_id(4);
         }
         
         

@@ -32,8 +32,7 @@ xmlns:id="http://xmlns.jcp.org/jsf/passthrough">
 				
 
 
-
-				<h:inputText styleClass="column-left" value="#{loginBean}" 
+				<h:inputText styleClass="column-left" value="#{loginBean.person.address.get(0).city}" 
 				pt:placeholder="city" required="required"/>
 			
 					
@@ -59,17 +58,17 @@ xmlns:id="http://xmlns.jcp.org/jsf/passthrough">
 				
 					
 				<h:inputText styleClass="column-right"  
-				pt:placeholder="Card Number" required="required"/>
+				pt:placeholder="Card Number" />
 
 
 
 				<h:inputText styleClass="column-right"  
-				pt:placeholder="MM / YY" required="required"/>
+				pt:placeholder="MM / YY" />
 			
 			
 								
 				<h:inputText styleClass="column-right" 
-				pt:placeholder="CCV" required="required"/>
+				pt:placeholder="CCV" />
 
 				<h:commandButton action="#{checkOutBean.processPayment()}" value="Submit" />
 			</h:panelGroup>
